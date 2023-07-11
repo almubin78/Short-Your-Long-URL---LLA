@@ -31,6 +31,7 @@ const Entry = ({ updateShortUrls }) => {
   return (
     <div className=''>
       <Input
+        addonBefore="http://"
         placeholder="Enter Your URL which want to shorter"
         value={longUrl}
         className='w-50 mb-2'

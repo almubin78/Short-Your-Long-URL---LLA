@@ -3,6 +3,7 @@ import { Button, Input, List, Modal } from 'antd';
 import Entry from './Pagese/Entry/Entry';
 import ListPage from './Pagese/List/List';
 import Edit from './Pagese/Edit/Edit';
+import Contact from './Pagese/Contact/Contact';
 
 const App = () => {
   // const [urls, setUrls] = useState([
@@ -34,15 +35,16 @@ const App = () => {
 
   return (
     <div className='container'>
-     
-     {/* <h2>Inside Component</h2>
+
+      {/* <h2>Inside Component</h2>
       <EntryPage/>
       <EditPage/>
       <ListPage/> */}
-     <h2>Inside Pages</h2>
-     <Entry/>
-     <ListPage/>
-     <Edit/>
+      <h2>Inside Pages</h2>
+      <Entry />
+      <ListPage />
+      <Edit />
+      <Contact />
     </div>
   );
 };
