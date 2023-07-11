@@ -25,7 +25,7 @@ const Entry = ({ updateShortUrls }) => {
     // You can use a library or algorithm to generate unique short URLs
     // For simplicity, let's use a random string for now
     const randomString = Math.random().toString(36).substring(7);
-    return `https://example.com/${randomString}`;
+    return `https://shortURL.com/${randomString}`;
   };
 
   return (
@@ -40,6 +40,7 @@ const Entry = ({ updateShortUrls }) => {
       <Button type="primary" onClick={generateShortUrl}>
         Generate Short URL
       </Button>
+      
     </div>
   );
 };

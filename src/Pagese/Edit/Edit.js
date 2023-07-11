@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { List, Modal, Form, Input, Button } from 'antd';
+import { List, Modal, Form, Input, Button, Divider } from 'antd';
 
 // const Edit = ({ shortUrls, updateShortUrls }) => {
 const Edit = () => {
@@ -44,25 +44,34 @@ const Edit = () => {
     // Modal.confirm({
     //   title: 'Delete URL',
     //   content: `Are you sure you want to delete the short URL: ${url}?`,
-     
+
     // });
   };
 
   return (
     <div>
+      <Divider orientation="right" plain>
+      Edit Section
+    </Divider>
       <h3>Edit Your Links</h3>
       <List
+
         dataSource={shortUrls}
         renderItem={(item) => (
-          <List.Item>
-            <span className='bg-primary rounded'>{item.longUrl}</span>
-            <Button
-              onClick={() => handleEditModalOpen(item.shortUrl)}
-              className='d-block'
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <List.Item
+              
+            >
+              <span className='bg-primary rounded mx-2'>{item.longUrl}</span>
+              <Button
+                onClick={() => handleEditModalOpen(item.shortUrl)}
+                type='primary'
+                className=' mx-2'
 
-            >Edit</Button>
-            <Button onClick={() => handleDelete(item.shortUrl)}>Delete</Button>
-          </List.Item>
+              >Edit</Button>
+              <Button className=' mx-2' type='primary' onClick={() => handleDelete(item.shortUrl)}>Delete</Button>
+            </List.Item>
+          </div>
         )}
       />
 
