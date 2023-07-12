@@ -40,11 +40,15 @@ const Edit = ({ updateShortUrls }) => {
       title: 'Delete URL',
       content: `Are you sure you want to delete the short URL: ${url}?`,
       onOk: () => {
-        const updatedShortUrls = shortUrls.filter((item) => item.shortUrl !== url);
+        const updatedShortUrls = shortUrls.filter((item) => item.longUrl !== url);
         localStorage.setItem('shortUrls', JSON.stringify(updatedShortUrls));
         setShortUrls(updatedShortUrls);
         updateShortUrls(updatedShortUrls);
         setEditModalVisible(false);
+        
+      },
+      onCancel: () => {
+        // Handle cancel event if needed
       },
     });
   };
@@ -54,7 +58,7 @@ const Edit = ({ updateShortUrls }) => {
       <Divider orientation="right" plain>
         Edit Section
       </Divider>
-      <h3>Edit Your Links</h3>
+      <h3>Replace Your Old Links to new!!</h3>
       <List
         dataSource={shortUrls}
         renderItem={(item) => (
@@ -68,8 +72,8 @@ const Edit = ({ updateShortUrls }) => {
               </List.Item>
               <p>Long URL:</p>
               <p className='bg-primary rounded mx-2'>{item.longUrl}</p>
-              <p>Short URL:</p>
-              <p className='bg-primary rounded mx-2 block'>{item.shortUrl}</p>
+              {/* <p>Short URL:</p> */}
+              {/* <p className='bg-primary rounded mx-2 block'>{item.shortUrl}</p> */}
 
               <Button onClick={() => handleEditModalOpen(item.longUrl)} type='primary' className='mx-2'>
                 Edit Long URL

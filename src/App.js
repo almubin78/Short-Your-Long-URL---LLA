@@ -13,7 +13,7 @@ const App = () => {
       <ListPage />
       <Edit />
       <Contact />
-      <MyComponent/>
+      {/* <MyComponent/> */}
     </div>
   );
 };
