@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Input, Button, message } from 'antd';
+import React, { useState } from 'react';
+import { Input, Button, message, Divider } from 'antd';
 
 const Entry = ({ updateShortUrls }) => {
   const [longUrl, setLongUrl] = useState('');
@@ -30,9 +30,12 @@ const Entry = ({ updateShortUrls }) => {
 
   return (
     <div className=''>
+      <Divider orientation="right" plain>
+        Put Your Link And Click `Generate Short URL` Button
+      </Divider>
       <Input
         addonBefore="http://"
-        placeholder="Enter Your URL which want to shorter"
+        placeholder="Enter Your URL which want to shorten"
         value={longUrl}
         className='w-50 mb-2'
         onChange={(e) => setLongUrl(e.target.value)}
@@ -41,7 +44,6 @@ const Entry = ({ updateShortUrls }) => {
       <Button type="primary" onClick={generateShortUrl}>
         Generate Short URL
       </Button>
-      
     </div>
   );
 };

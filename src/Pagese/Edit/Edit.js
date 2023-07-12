@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { List, Modal, Form, Input, Button, Divider } from 'antd';
 
-// const Edit = ({ shortUrls, updateShortUrls }) => {
-const Edit = () => {
+const Edit = ({ updateShortUrls }) => {
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [editUrl, setEditUrl] = useState('');
   const [shortUrls, setShortUrls] = useState([]);
@@ -13,8 +12,8 @@ const Edit = () => {
     setShortUrls(storedShortUrls);
   }, []);
 
-
   const handleEditModalOpen = (url) => {
+    console.log('handleEditModalOpen url',url);
     setEditUrl(url);
     setEditModalVisible(true);
   };
@@ -25,53 +24,61 @@ const Edit = () => {
   };
 
   const handleEditSubmit = (values) => {
-    console.log(values);
+    console.log('value from handleEditSubmit',values);
     const updatedShortUrls = shortUrls.map((item) =>
-      item.shortUrl === editUrl ? { ...item, longUrl: values.longUrl } : item
+      item.longUrl === editUrl ? { ...item, longUrl: values.longUrl } : item
     );
     localStorage.setItem('shortUrls', JSON.stringify(updatedShortUrls));
 
     setEditModalVisible(false);
     setShortUrls(updatedShortUrls);
+    updateShortUrls(updatedShortUrls);
   };
 
   const handleDelete = (url) => {
-    const updatedShortUrls = shortUrls.filter((item) => item.shortUrl !== url);
-    localStorage.setItem('shortUrls', JSON.stringify(updatedShortUrls));
-
-    setShortUrls(updatedShortUrls);
-
-    // Modal.confirm({
-    //   title: 'Delete URL',
-    //   content: `Are you sure you want to delete the short URL: ${url}?`,
-
-    // });
+    Modal.confirm({
+      title: 'Delete URL',
+      content: `Are you sure you want to delete the short URL: ${url}?`,
+      onOk: () => {
+        const updatedShortUrls = shortUrls.filter((item) => item.shortUrl !== url);
+        localStorage.setItem('shortUrls', JSON.stringify(updatedShortUrls));
+        setShortUrls(updatedShortUrls);
+        updateShortUrls(updatedShortUrls);
+        setEditModalVisible(false);
+      },
+    });
   };
 
   return (
     <div>
       <Divider orientation="right" plain>
-      Edit Section
-    </Divider>
+        Edit Section
+      </Divider>
       <h3>Edit Your Links</h3>
       <List
-
         dataSource={shortUrls}
         renderItem={(item) => (
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <List.Item
-              
+          <>
+            <div
+              style={{ alignItems: 'center', justifyContent: 'space-between' }}
+              className='d-md-flex'
             >
-              <span className='bg-primary rounded mx-2'>{item.longUrl}</span>
-              <Button
-                onClick={() => handleEditModalOpen(item.shortUrl)}
-                type='primary'
-                className=' mx-2'
+              <List.Item>
 
-              >Edit</Button>
-              <Button className=' mx-2' type='primary' onClick={() => handleDelete(item.shortUrl)}>Delete</Button>
-            </List.Item>
-          </div>
+              </List.Item>
+              <p>Long URL:</p>
+              <p className='bg-primary rounded mx-2'>{item.longUrl}</p>
+              <p>Short URL:</p>
+              <p className='bg-primary rounded mx-2 block'>{item.shortUrl}</p>
+
+              <Button onClick={() => handleEditModalOpen(item.longUrl)} type='primary' className='mx-2'>
+                Edit Long URL
+              </Button>
+              <Button className='mx-2' type='primary' onClick={() => handleDelete(item.longUrl)}>
+                Delete
+              </Button>
+            </div>
+          </>
         )}
       />
 
